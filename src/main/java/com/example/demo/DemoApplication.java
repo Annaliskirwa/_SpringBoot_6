@@ -23,14 +23,14 @@ public class DemoApplication extends SpringBootServletInitializer {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@Bean
-	public TimedAspect timedAspect(MeterRegistry registry){
-		return new TimedAspect(registry);
-	}
-
-	@Timed(value = "greeting.time", description = "The time taken to return the greeting method")
-	public String sayHello(){
-		return "Saying hello from this side";}
+//	@Bean
+//	public TimedAspect timedAspect(MeterRegistry registry){
+//		return new TimedAspect(registry);
+//	}
+//
+//	@Timed(value = "greeting.time", description = "The time taken to return the greeting method")
+//	public String sayHello(){
+//		return "Saying hello from this side";}
 
 	@GetMapping("/working")
 	public String sayhello(){
