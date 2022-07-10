@@ -29,6 +29,13 @@ public class UserDAOService {
         return user;
     }
     //find one user
-
+    public User findOne(int id){
+        for(User user: users){
+            if(user.getId()==id){
+                return user;
+            }
+        }
+        return null;
+    }
 
 }
