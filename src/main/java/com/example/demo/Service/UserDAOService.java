@@ -1,6 +1,6 @@
 package com.example.demo.Service;
 
-import com.example.demo.entities.User;
+import com.example.demo.Entities.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

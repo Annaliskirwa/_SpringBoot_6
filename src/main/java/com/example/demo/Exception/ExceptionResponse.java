@@ -1,20 +1,17 @@
-package com.example.demo.entities;
+package com.example.demo.Exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-//user data access object(DAO)
-
 import java.util.Date;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-    private Integer id;
-    private String name;
-    private Date birthDate;
+public class ExceptionResponse {
+    private Date timestamp;
+    private String message;
+    private String details;
 }
