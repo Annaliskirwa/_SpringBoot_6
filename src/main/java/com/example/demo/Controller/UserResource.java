@@ -22,7 +22,9 @@ public class UserResource {
 
     @GetMapping("/users/{id}")
     public User retrieveOneUser(@PathVariable int id){
-        return userDAOService.findOne(id);
+        User user = userDAOService.findOne(id);
+        if(user == null)throw new UserNotFoundException("id-"+ id);
+        return  user;
     }
     @PostMapping("/users")
     public ResponseEntity<Object> createUser(@RequestBody User user){
