@@ -4,6 +4,7 @@ import com.example.demo.Exception.UserNotFoundException;
 import com.example.demo.Service.UserDAOService;
 import com.example.demo.Entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,10 +24,11 @@ public class UserResource {
     }
 
     @GetMapping("/users/{id}")
-    public User retrieveOneUser(@PathVariable int id){
+    public EntityModel<User> retrieveOneUser(@PathVariable int id){
         User user = userDAOService.findOne(id);
         if(user == null)throw new UserNotFoundException("id-"+ id);
-        return  user;
+        EntityModel<User> model = EntityModel.of(user);
+        return  model;
     }
     @PostMapping("/users")
     public ResponseEntity<Object> createUser(@Valid @RequestBody User user){
