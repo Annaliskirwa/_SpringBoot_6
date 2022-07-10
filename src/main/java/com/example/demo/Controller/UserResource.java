@@ -5,6 +5,9 @@ import com.example.demo.Service.UserDAOService;
 import com.example.demo.Entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -28,6 +31,8 @@ public class UserResource {
         User user = userDAOService.findOne(id);
         if(user == null)throw new UserNotFoundException("id-"+ id);
         EntityModel<User> model = EntityModel.of(user);
+        WebMvcLinkBuilder linkToUsers = linkTo(methodOn(this.getClass()).retrieveAllUsers());
+        model.add(linkToUsers.withRel("all-users"));
         return  model;
     }
     @PostMapping("/users")
