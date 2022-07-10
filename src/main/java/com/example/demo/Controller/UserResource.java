@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Exception.UserNotFoundException;
 import com.example.demo.Service.UserDAOService;
 import com.example.demo.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
