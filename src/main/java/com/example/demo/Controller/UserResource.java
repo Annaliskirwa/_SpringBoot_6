@@ -4,6 +4,7 @@ import com.example.demo.Service.UserDAOService;
 import com.example.demo.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,5 +17,10 @@ public class UserResource {
     @GetMapping("/users")
     public List<User> retrieveAllUsers(){
         return userDAOService.findAll();
+    }
+
+    @GetMapping("/users/{id}")
+    public User retrieveOneUser(@PathVariable int id){
+        return userDAOService.findOne(id);
     }
 }
