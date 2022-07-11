@@ -1,10 +1,12 @@
 package com.example.demo;
 
 import com.example.demo.Entities.HelloWorldBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -15,6 +17,8 @@ import java.util.Locale;
 @SpringBootApplication
 @RestController
 public class SpringMicroservices extends SpringBootServletInitializer {
+	@Autowired
+	private MessageSource messageSource;
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -47,7 +51,8 @@ public class SpringMicroservices extends SpringBootServletInitializer {
 	}
 	@GetMapping(path = "/hello-world-internationalized")
 	public String helloWorldInternationalized(@RequestHeader(name="Accept-Language", required = false)Locale locale){
-		return "Hello World";
+//		return "Hello World";
+		return messageSource.getMessage("good.morning.message", null, "Default Message",locale);
 	}
 }
 
