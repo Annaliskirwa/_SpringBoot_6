@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class PersonVersioniningController {
+public class PersonVersioningController {
 //    Versioning using basic uris: URI Versioning
     @GetMapping("v1/person")
     public PersonV1 personV1(){
