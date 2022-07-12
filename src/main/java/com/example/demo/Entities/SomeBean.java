@@ -12,10 +12,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@JsonIgnoreProperties(value={"field1"})
+//@JsonIgnoreProperties(value={"field1"})
 public class SomeBean {
     private String field1;
     private String field2;
-    @JsonIgnore
+//    @JsonIgnore
     private String field3;
 }
