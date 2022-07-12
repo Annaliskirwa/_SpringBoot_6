@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PersonVersioniningController {
-//    Versioning using basic uris
+//    Versioning using basic uris: URI Versioning
     @GetMapping("v1/person")
     public PersonV1 personV1(){
         return new PersonV1("Annalis Kirwa");
@@ -14,7 +14,7 @@ public class PersonVersioniningController {
     public PersonV2 personV2(){
         return new PersonV2(new Name("Annalis","Kirwa"));
     }
-    //Another versioning method using params
+    //Another versioning method using params:Request parameter versioning
     @GetMapping(value = "/person/param", params ="version=1" )
     public PersonV1 paramV1(){
         return new PersonV1("Annalis Kirwa");
@@ -33,7 +33,7 @@ public class PersonVersioniningController {
         return new PersonV2(new Name("Annalis","Kirwa"));
     }
 
-//    Versioning using producers
+//    Versioning using producers: Accept header versioning/MIME TYPE VERSIONING
     @GetMapping(value = "/person/produces", produces ="application/vnd.company.app-v1+json")
     public PersonV1 producesV1(){
     return new PersonV1("Annalis Kirwa");
