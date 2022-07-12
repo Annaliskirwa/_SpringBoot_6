@@ -16,7 +16,7 @@ public class FilteringController {
     @GetMapping("/filtering")
     public MappingJacksonValue retrieveSomeBean(){
         SomeBean someBean =  new SomeBean("value1", "value2", "value3");
-        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("field1, field2");
+        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("field1", "field2");
         FilterProvider filters = new SimpleFilterProvider().addFilter("SomeBeanFilter", filter);
         MappingJacksonValue mapping = new MappingJacksonValue(someBean);
         mapping.setFilters(filters);
