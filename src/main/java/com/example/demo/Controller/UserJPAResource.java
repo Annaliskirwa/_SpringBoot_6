@@ -1,7 +1,9 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Entities.Post;
 import com.example.demo.Entities.User;
 import com.example.demo.Exception.UserNotFoundException;
+import com.example.demo.Repository.PostRepository;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Service.UserDAOService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class UserJPAResource {
     @Autowired
     private UserDAOService userDAOService;
 
+    @Autowired
+    private PostRepository postRepository;
     @Autowired
     private UserRepository userRepository;
     @GetMapping("/jpa/users")
@@ -50,6 +54,26 @@ public class UserJPAResource {
     public void deleteUser(@PathVariable int id){
         userRepository.deleteById(id);
     }
+//    Retrieve all the posts for a specific user
+@GetMapping("/jpa/users/{id}/posts")
+public List<Post> retrieveAllUsers(@PathVariable int id){
+
+        Optional<User> userOptional =  userRepository.findById(id);
+        if(!userOptional.isPresent()) throw new UserNotFoundException("id-" + id);
+        return userOptional.get().getPosts();
+}
+    @PostMapping("/jpa/users/{id}/posts")
+    public ResponseEntity<Object> createPost(@PathVariable int id, @RequestBody Post post){
+        Optional<User> userOptional =  userRepository.findById(id);
+        if(!userOptional.isPresent()) throw new UserNotFoundException("id-" + id);
+        User user = userOptional.get();
+        post.setUser(user);
+        postRepository.save(post);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(post.getId()).toUri();
+        return ResponseEntity.created(location).build();
+    }
+
+
 }
 
 
