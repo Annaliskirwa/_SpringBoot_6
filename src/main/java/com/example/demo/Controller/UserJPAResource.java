@@ -48,9 +48,7 @@ public class UserJPAResource {
     }
     @DeleteMapping("/jpa/users/{id}")
     public void deleteUser(@PathVariable int id){
-        User user = userDAOService.deleteById(id);
-        if(user == null)throw new UserNotFoundException("id-"+ id);
-
+        userRepository.deleteById(id);
     }
 }
 
