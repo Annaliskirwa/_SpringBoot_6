@@ -32,4 +32,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
 
+    //Constructor for the in memory  user entity
+    public User(int i, String annalis, Date date) {
+    }
 }

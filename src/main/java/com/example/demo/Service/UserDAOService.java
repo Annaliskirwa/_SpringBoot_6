@@ -1,6 +1,8 @@
 package com.example.demo.Service;
 
 import com.example.demo.Entities.User;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
