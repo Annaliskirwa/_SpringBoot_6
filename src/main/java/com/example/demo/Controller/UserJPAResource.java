@@ -14,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -31,10 +32,10 @@ public class UserJPAResource {
     }
 
     @GetMapping("/jpa/users/{id}")
-    public EntityModel<User> retrieveOneUser(@PathVariable int id){
-        User user = userDAOService.findOne(id);
-        if(user == null)throw new UserNotFoundException("id-"+ id);
-        EntityModel<User> model = EntityModel.of(user);
+    public EntityModel<Optional<User>> retrieveOneUser(@PathVariable int id){
+        Optional<User> user = userRepository.findById(id);
+        if(!user.isPresent())throw new UserNotFoundException("id-"+ id);
+        EntityModel<Optional<User>> model = EntityModel.of(user);
         WebMvcLinkBuilder linkToUsers = linkTo(methodOn(this.getClass()).retrieveAllUsers());
         model.add(linkToUsers.withRel("all-users"));
         return  model;
