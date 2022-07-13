@@ -7,12 +7,11 @@ import lombok.Setter;
 
 //user data access object(DAO)
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,5 +28,8 @@ public class User {
     private String name;
     @Past
     private Date birthDate;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
 
 }
