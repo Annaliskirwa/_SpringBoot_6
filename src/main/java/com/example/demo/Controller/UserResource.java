@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import com.example.demo.Exception.UserNotFoundException;
 import com.example.demo.Service.UserDAOService;
 import com.example.demo.Entities.User;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;

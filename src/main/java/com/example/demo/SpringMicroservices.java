@@ -59,6 +59,4 @@ public class SpringMicroservices extends SpringBootServletInitializer {
 //				locale);
 				LocaleContextHolder.getLocale());
 	}
-
 }
-

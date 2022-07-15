@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -14,6 +15,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Date;
+
+import static javax.xml.bind.JAXB.unmarshal;
 
 @Getter
 @Setter
@@ -47,7 +50,7 @@ public class Book {
     }
 
 //    Marshalling:Writing java objects into XML
-    public void marshal() throws JAXBException{
+    public static void marshal() throws JAXBException{
         Book book = new Book();
         book.setId(1L);
         book.setName("Learning everyday");
@@ -63,8 +66,19 @@ public class Book {
 //        output file to store the generated XML as parameters.
     }
 //    Unmarshalling: read book.xml back to java objects
-    public Book unmarshall() throws JAXBException, FileNotFoundException {
-        JAXBContext context = JAXBContext.newInstance(Book.class);
-        return (Book) context.createUnmarshaller().unmarshal(new FileReader("./book.xml"));
+public Book unmarshall() throws JAXBException, IOException {
+    JAXBContext context = JAXBContext.newInstance(Book.class);
+    return (Book) context.createUnmarshaller()
+            .unmarshal(new FileReader("E:\\Graduate_program\\Basics\\demo\\book.xml"));
+}
+
+    @GetMapping("/marshall")
+    public void returnMarshall() throws JAXBException {
+        marshal();
+
+    }
+    @GetMapping(value = "/unmarshall", produces = "application/xml")
+    public void returnUnMarshall() throws JAXBException, IOException {
+        unmarshall();
     }
 }
