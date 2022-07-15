@@ -38,4 +38,11 @@ public class Book {
     public void setAuthor(String author){
         this.author = author;
     }
+    public void marshal() {
+        Book book = new Book();
+        book.setId(1L);
+        book.setName("Learning everyday");
+        book.setAuthor("Annalis");
+        book.setDate(new Date());
+    }
 }
