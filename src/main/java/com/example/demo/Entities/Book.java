@@ -10,6 +10,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.*;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Date;
 
 @Getter
@@ -42,7 +45,9 @@ public class Book {
     public void setAuthor(String author){
         this.author = author;
     }
-    public void marshal() throws JAXBException {
+
+//    Marshalling:Writing java objects into XML
+    public void marshal() throws JAXBException{
         Book book = new Book();
         book.setId(1L);
         book.setName("Learning everyday");
@@ -56,5 +61,10 @@ public class Book {
 //        To have JAXB format the output
         marshaller.marshal(book, new File("./book.xml"));
 //        output file to store the generated XML as parameters.
+    }
+//    Unmarshalling: read book.xml back to java objects
+    public Book unmarshall() throws JAXBException, FileNotFoundException {
+        JAXBContext context = JAXBContext.newInstance(Book.class);
+        return (Book) context.createUnmarshaller().unmarshal(new FileReader("./book.xml"));
     }
 }
