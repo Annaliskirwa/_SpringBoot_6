@@ -5,7 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.*;
+import java.io.File;
 import java.util.Date;
 
 @Getter
@@ -38,11 +42,19 @@ public class Book {
     public void setAuthor(String author){
         this.author = author;
     }
-    public void marshal() {
+    public void marshal() throws JAXBException {
         Book book = new Book();
         book.setId(1L);
         book.setName("Learning everyday");
         book.setAuthor("Annalis");
         book.setDate(new Date());
+
+        JAXBContext context = JAXBContext.newInstance(Book.class);
+//        provides a client's entry point to JAXB API
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+//        To have JAXB format the output
+        marshaller.marshal(book, new File("./book.xml"));
+//        output file to store the generated XML as parameters.
     }
 }
