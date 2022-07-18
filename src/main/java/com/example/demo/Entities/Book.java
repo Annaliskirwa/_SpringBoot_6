@@ -1,5 +1,6 @@
 package com.example.demo.Entities;
 
+import com.example.demo.DateAdapter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -54,6 +55,10 @@ public class Book {
     }
 
 
+    @XmlJavaTypeAdapter(DateAdapter.class)
+    public void setDate(Date date){
+        this.date = date;
+    }
 
 //    Marshalling:Writing java objects into XML
     public static void marshal() throws JAXBException{
