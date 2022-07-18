@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -27,6 +29,7 @@ import static javax.xml.bind.JAXB.unmarshal;
 //The name of the root XML element is derived from the class name
 @XmlType(propOrder = {"id","name","date"})
 //the order in which the fields are written in the XML file
+@RestController
 public class Book {
     private Long id;
     private String name;
@@ -53,7 +56,7 @@ public class Book {
     public static void marshal() throws JAXBException{
         Book book = new Book();
         book.setId(1L);
-        book.setName("Learning everyday");
+        book.setName("Learning everyday and today is monday");
         book.setAuthor("Annalis");
         book.setDate(new Date());
 
@@ -69,15 +72,16 @@ public class Book {
 public Book unmarshall() throws JAXBException, IOException {
     JAXBContext context = JAXBContext.newInstance(Book.class);
     return (Book) context.createUnmarshaller()
-            .unmarshal(new FileReader("E:\\Graduate_program\\Basics\\demo\\book.xml"));
+            .unmarshal(new FileReader("./book.xml"));
 }
+
 
     @GetMapping("/marshall")
     public void returnMarshall() throws JAXBException {
         marshal();
 
     }
-    @GetMapping(value = "/unmarshall", produces = "application/xml")
+    @PostMapping(value = "/unmarshall")
     public void returnUnMarshall() throws JAXBException, IOException {
         unmarshall();
     }
