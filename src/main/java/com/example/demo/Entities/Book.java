@@ -12,6 +12,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -51,6 +52,8 @@ public class Book {
     public void setAuthor(String author){
         this.author = author;
     }
+
+
 
 //    Marshalling:Writing java objects into XML
     public static void marshal() throws JAXBException{
